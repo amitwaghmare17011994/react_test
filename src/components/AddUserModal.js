@@ -3,13 +3,23 @@ import React from "react";
 export class AddUserModal extends React.Component {
   state = { user: {} };
   updateUser = (e) => {
-    const user = { ...this.state.user,[e.target.id]: e.target.value };
+    const user = { ...this.state.user, [e.target.id]: e.target.value };
     this.setState({ user: { ...user } });
-
-};
+  };
+  validate = () =>
+    ["name", "username", "email", "website"].every(
+      (item) => this.state.user[item] && this.state.user[item].trim().length > 0
+    );
+  addUser = () => {
+    if (this.validate()) {
+      this.props.onAddUser(this.state.user);
+      return;
+    }
+    alert("Enter All Fields");
+  };
 
   render() {
-    const { onToggle,onAddUser } = this.props;
+    const { onToggle, onAddUser } = this.props;
     return (
       <div className="modal" style={{ display: "block" }}>
         <div className="modal-dialog">
@@ -64,7 +74,9 @@ export class AddUserModal extends React.Component {
               >
                 Close
               </button>
-              <button className="btn btn-primary" onClick={()=>onAddUser(this.state.user)}>Add</button>
+              <button className="btn btn-primary" onClick={this.addUser}>
+                Add
+              </button>
             </div>
           </div>
         </div>
