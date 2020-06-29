@@ -36,15 +36,21 @@ export class ContainerImpl extends React.Component {
         )}
 
         <div style={{ display: "flex" }}>
-          <div style={{ flex: 0.5 }}>
+          <div style={{ flex: 0.5, textAlign: "initial" }}>
+            <span style={{ fontSize: 20 ,fontWeight:'bold'}}>User App</span>
+          </div>
+          <div style={{ flex: 1 }}>
             <SearchBar onSearch={this.onSearch} />
           </div>
-          <button
-            onClick={() => this.props.showAddModal(true)}
-            className="btn btn-primary ml-5"
-          >
-            Add New User
-          </button>
+          <div style={{ flex: 1 }}>
+            <button
+              onClick={() => this.props.showAddModal(true)}
+              className="btn btn-primary "
+              style={{ float: "right" }}
+            >
+              Add New User
+            </button>
+          </div>
         </div>
 
         <div style={{ marginTop: 50 }}>
